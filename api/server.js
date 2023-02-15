@@ -1,39 +1,26 @@
 
 require("dotenv").config()
 
+//import dependencies
 const express = require('express');
 const conntectDb = require("./config/db");
-const Contact = require('./models/contact')
+const contactsController = require('./controllers/contactsController');
+const cors = require('cors');
 
 //create and configure express app
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 //connect to database
 conntectDb();
 
-app.get('/', (req, res) => {
-    res.json({Hellllo: "hello"})
-})
-
-app.post('/contacts', async (req,res) => {
-    const firstName = req.body.firstName;
-    const lastName = req.body.lastName;
-    const company = req.body.company;
-    const phoneNr = req.body.phoneNr;
-    const mail = req.body.mail;
-
-    const contact = await Contact.create({
-        firstName: firstName,
-        lastName: lastName,
-        company: company,
-        phoneNr: phoneNr,
-        mail: mail
-    });
-
-    res.json({contact: contact})
-    
-})
+// routing
+app.get('/contacts', contactsController.fetchContacts);
+app.get('/contacts/:id', contactsController.fetchContact);
+app.post('/contacts', contactsController.createContact);
+app.put('/contacts/:id', contactsController.updateContact);
+app.delete('/contacts/:id', contactsController.deleteContact);
 
 
 app.listen(process.env.PORT, () => {
