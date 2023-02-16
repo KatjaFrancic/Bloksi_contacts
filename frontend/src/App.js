@@ -5,6 +5,14 @@ import axios from 'axios';
 function App() {
   // state 
   const [contacts, setContacts] = useState(null);
+  const [updateForm, setUpdateForm] = useState({
+    _id: null,
+    firstName: '',
+    lastName: '',
+    company: '',
+    phoneNr: '',
+    mail: ''
+  })
 
   // use effect 
   useEffect(() => {
@@ -32,9 +40,56 @@ function App() {
     setContacts(newContacts);
   };
 
+  const handleUpdateFieldChange = (e) => {
+    const {value, name} = e.target
 
+    setUpdateForm({
+      ...updateForm,
+      [name]: value,
+    });
+  };
+  
+  const toggleUpdate = (contact) => {
+    // get current contact values
+    console.log(contact);
+    // set state on update form
+    setUpdateForm({
+      _id: contact._id,
+      firstName: contact.firstName,
+      lastName: contact.lastName,
+      company: contact.company,
+      phoneNr: contact.phoneNr,
+      mail: contact.mail
+    });
+  };
 
+const updateContact = async (e) => {
+  e.preventDefault();
 
+  const {firstName, lastName, company, phoneNr, mail } = updateForm;
+  // send update request
+  const res = await axios.put(`http://localhost:3000/contacts/${updateForm._id}`, {firstName, lastName, company, phoneNr, mail});
+  
+  // update state
+  const newContacts = [... contacts];
+  const contactIndex = contacts.findIndex((contact) => {
+    return contact._id = updateForm._id;
+  });
+  newContacts[contactIndex] = res.data.contact;
+  setContacts(newContacts);
+
+  // clear update form state
+  setUpdateForm({
+    _id: null,
+    firstName: '',
+    lastName: '',
+    company: '',
+    phoneNr: '',
+    mail: ''
+  })
+ 
+
+};
 
   return (
     <div className="App">
@@ -46,9 +101,32 @@ function App() {
             <button onClick={() => deleteContact(contact._id)}>
               Delete contact
             </button>
+            <button onClick={() => toggleUpdate(contact)}>
+              Update contact
+            </button>
         </div>
+        
         })}
       </div>
+
+      {updateForm._id && (
+      <div>
+        <h3>Update contact</h3>
+        <form onSubmit={updateContact}>
+          <label>First name: </label>
+          <input onChange={handleUpdateFieldChange} value={updateForm.firstName} name="firstName" />
+          <label>Last name: </label>
+          <input onChange={handleUpdateFieldChange} value={updateForm.lastName} name="lastName" />
+          <label>Company: </label>
+          <input onChange={handleUpdateFieldChange} value={updateForm.company} name="company" />
+          <label>Phone number: </label>
+          <input onChange={handleUpdateFieldChange} value={updateForm.phoneNr} name="phoneNr" />
+          <label>Mail: </label>
+          <input onChange={handleUpdateFieldChange} value={updateForm.mail} name="mail" />
+          <button type="submit">Update contact</button>
+        </form> 
+      </div>
+      )} 
     </div>
   );
 }
