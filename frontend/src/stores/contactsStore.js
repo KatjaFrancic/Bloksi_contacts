@@ -15,7 +15,7 @@ const contactsStore = create((set) => ({
 
     fetchContacts: async () => {
         // fetch contacts
-        const res = await axios.get('http://localhost:3000/contacts');
+        const res = await axios.get('/contacts');
         
         // set to state
         set({contacts: res.data.contacts})
@@ -23,7 +23,7 @@ const contactsStore = create((set) => ({
 
     deleteContact: async (_id) => {
         // delete contact
-        const res = await axios.delete(`http://localhost:3000/contacts/${_id}`);
+        const res = await axios.delete(`/contacts/${_id}`);
         const {contacts} = contactsStore.getState();
         
         // update state
@@ -62,7 +62,7 @@ const contactsStore = create((set) => ({
             contacts,
         } = contactsStore.getState();
         // send update request
-        const res = await axios.put(`http://localhost:3000/contacts/${_id}`, {
+        const res = await axios.put(`contacts/${_id}`, {
             firstName, lastName, company, phoneNr, mail
         });
         

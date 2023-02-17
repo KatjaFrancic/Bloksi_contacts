@@ -1,23 +1,37 @@
 import './App.css';
-import {useState, useEffect} from 'react';
-import axios from 'axios';
-import contactsStore from '../stores/contactsStore';
-import Contacts from './Contacts';
-import UpdateForm from './UpdateForm';
+import ContactsPage from '../pages/ContactsPage';
+import LoginPage from '../pages/LoginPage';
+import {BrowserRouter, Routes, Route, Link}from 'react-router-dom';
+import RequireAuth from './RequireAuth';
 
 function App() {
-  const store = contactsStore();
 
-  // use effect 
-  useEffect(() => {
-    store.fetchContacts();
-  }, []);
 
   return (
     <div className="App">
-      <Contacts />
+      <BrowserRouter>
+      <ul>
+        <li>
+          <Link to ="/">Home</Link>
+        </li>
+        <li>
+          <Link to ="/login">Login</Link>
+        </li>
+        <li>
+          <Link to ="/register">Register</Link>
+        </li>
+      </ul>
+      <Routes>
+        <Route index element ={<RequireAuth>
+          <ContactsPage />
+        </RequireAuth>} />
+        <Route path='/login' element={<LoginPage />} />
+        
+      </Routes>
+      </BrowserRouter>
+      
+      
 
-      <UpdateForm/>
     </div>
   );
 }
