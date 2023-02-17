@@ -10,10 +10,15 @@ const usersController = require('./controllers/usersController');
 const cookieParser = require('cookie-parser');
 const requireAuth = require('./middleware/requireAuth');
 
-//create and configure express app
+//create an express app 
 const app = express();
+
+// configure express app
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: true,
+    credentials: true,
+}));
 app.use(cookieParser());
 
 //connect to database
@@ -28,7 +33,7 @@ app.delete('/contacts/:id', contactsController.deleteContact);
 
 app.post('/register', usersController.register);
 app.post('/login', usersController.login);
-app.get('logout', usersController.logout);
+app.get('/logout', usersController.logout);
 app.get('/check-auth', requireAuth, usersController.checkAuth);
 
 app.listen(process.env.PORT, () => {
