@@ -7,11 +7,14 @@ const conntectDb = require("./config/db");
 const contactsController = require('./controllers/contactsController');
 const cors = require('cors');
 const usersController = require('./controllers/usersController');
+const cookieParser = require('cookie-parser');
+const requireAuth = require('./middleware/requireAuth');
 
 //create and configure express app
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
 
 //connect to database
 conntectDb();
@@ -22,9 +25,11 @@ app.get('/contacts/:id', contactsController.fetchContact);
 app.post('/contacts', contactsController.createContact);
 app.put('/contacts/:id', contactsController.updateContact);
 app.delete('/contacts/:id', contactsController.deleteContact);
+
 app.post('/register', usersController.register);
 app.post('/login', usersController.login);
 app.get('logout', usersController.logout);
+app.get('/check-auth', requireAuth, usersController.checkAuth);
 
 app.listen(process.env.PORT, () => {
     console.log(`App is listening at http://localhost:${process.env.PORT}`)
