@@ -25,15 +25,14 @@ app.use(cookieParser());
 conntectDb();
 
 // routing
-app.get('/contacts', contactsController.fetchContacts);
-app.get('/contacts/:id', contactsController.fetchContact);
-app.post('/contacts', contactsController.createContact);
-app.put('/contacts/:id', contactsController.updateContact);
-app.delete('/contacts/:id', contactsController.deleteContact);
+app.get('/contacts', requireAuth, contactsController.fetchContacts);
+app.get('/contacts/:id', requireAuth, contactsController.fetchContact);
+app.post('/contacts', requireAuth, contactsController.createContact);
+app.put('/contacts/:id', requireAuth, contactsController.updateContact);
+app.delete('/contacts/:id', requireAuth, contactsController.deleteContact);
 
 app.post('/register', usersController.register);
 app.post('/login', usersController.login);
-app.get('/logout', usersController.logout);
 app.get('/check-auth', requireAuth, usersController.checkAuth);
 
 app.listen(process.env.PORT, () => {
