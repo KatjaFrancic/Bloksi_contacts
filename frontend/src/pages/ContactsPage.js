@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import Contacts from "../components/Contacts";
 import UpdateForm from "../components/UpdateForm";
 import contactsStore from "../stores/contactsStore";
+import Logout from '../components/Logout';
 
 export default function ContactsPage() {
     const store = contactsStore();
@@ -14,6 +15,7 @@ export default function ContactsPage() {
     
     return (
         <div>
+            <Logout />
             <Contacts />
             <UpdateForm/>
         </div>

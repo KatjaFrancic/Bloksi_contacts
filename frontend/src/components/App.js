@@ -3,6 +3,7 @@ import ContactsPage from '../pages/ContactsPage';
 import LoginPage from '../pages/LoginPage';
 import {BrowserRouter, Routes, Route, Link}from 'react-router-dom';
 import RequireAuth from './RequireAuth';
+import RegistrationPage from '../pages/RegistrationPage';
 
 function App() {
 
@@ -26,7 +27,7 @@ function App() {
           <ContactsPage />
         </RequireAuth>} />
         <Route path='/login' element={<LoginPage />} />
-        
+        <Route path='/register' element={<RegistrationPage />} />
       </Routes>
       </BrowserRouter>
       
