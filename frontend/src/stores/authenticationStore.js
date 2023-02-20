@@ -9,6 +9,11 @@ const authStore = create((set) => ({
         password: '',
     },
 
+    registrationForm: {
+        username: '',
+        password: '',
+    },
+
     updateLoginForm: (e) => {
         const { name, value } = e.target;
 
@@ -30,7 +35,10 @@ const authStore = create((set) => ({
             withCredentials: true,
         });
 
-        set({loggedIn: true});
+        set({loggedIn: true, loginForm: {
+            username: '',
+            password: '',
+        }});
 
     },
 
@@ -41,7 +49,40 @@ const authStore = create((set) => ({
         } catch(err) {
             set({loggedIn: false});
         }
+    },
+
+    updateRegistrationForm: (e) => {
+        const { name, value } = e.target;
+
+        set((state) => {
+            return {
+                registrationForm: {
+                    ...state.registrationForm,
+                    [name]: value,
+                },
+            };
+        });
+    },
+
+    register: async () => {
+        const {registrationForm} = authStore.getState();
+        const res = await axios.post('/register', registrationForm, {withCredentials: true})
+        
+        set({
+            registrationForm: {
+                username: '',
+                password: '',
+            }
+        })
+
+        console.log(res);
+
+    },
+
+    logout:  () => {
+        set({loggedIn: false})
     }
+
 }));
 
 export default authStore;
