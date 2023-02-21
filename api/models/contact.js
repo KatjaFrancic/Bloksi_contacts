@@ -5,7 +5,12 @@ const contactSchema = new mongoose.Schema({
     lastName: String,
     company: String,
     phoneNr: String,
-    mail: String
+    mail: String,
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        
+    }
 });
 const Contact = mongoose.model('Contact', contactSchema);
 
