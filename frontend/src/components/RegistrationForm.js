@@ -11,17 +11,29 @@ export default function RegistrationForm() {
     }
     return (
         <div>
-        <form onSubmit={handleRegistration}>
-            <input onChange={store.updateRegistrationForm} 
-            value={store.registrationForm.username} 
-            type="username" name="username"
-            />
-            <input onChange={store.updateRegistrationForm} 
-            value={store.registrationForm.password}
-            type="password" name="password" 
-            />
-            <button type="submit">Register</button>
-        </form>
+            <table>
+                <td>
+                    <form onSubmit={handleRegistration}>
+                        <tr>
+                            <td><label>Username: </label></td>
+                            <td><input onChange={store.updateRegistrationForm}
+                                value={store.registrationForm.username}
+                                type="username" name="username"
+                            />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label>Password: </label></td>
+                            <td><input onChange={store.updateRegistrationForm}
+                                value={store.registrationForm.password}
+                                type="password" name="password"
+                            />
+                            </td>
+                        </tr>
+                        <button type="submit">Register</button>
+                    </form>
+                </td>
+            </table>
         </div>
     );
 }

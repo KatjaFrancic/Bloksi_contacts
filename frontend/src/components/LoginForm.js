@@ -1,6 +1,6 @@
 import authStore from "../stores/authenticationStore";
 import React from 'react';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginForm() {
     const store = authStore();
@@ -13,20 +13,33 @@ export default function LoginForm() {
         // Navigate
         navigate('/')
     };
-    
+
     return (
         <div>
-        <form onSubmit={handleLogin}>
-            <input onChange={store.updateLoginForm} 
-            value={store.loginForm.username} 
-            type="username" name="username"
-            />
-            <input onChange={store.updateLoginForm} 
-            value={store.loginForm.password}
-            type="password" name="password" 
-            />
-            <button type="submit">Login</button>
-        </form>
+            <table>
+                <td><form onSubmit={handleLogin}>
+                    <tr>
+                        <td><label>Username: </label></td>
+                        <td><input onChange={store.updateLoginForm}
+                            value={store.loginForm.username}
+                            type="username" name="username"
+                        />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Password: </label></td>
+                        <td><input onChange={store.updateLoginForm}
+                            value={store.loginForm.password}
+                            type="password" name="password"
+                        />
+                        </td>
+                    </tr>
+                    <button type="submit">Log in</button>
+                </form>
+                </td>
+            </table>
         </div>
+
     );
 }

@@ -1,38 +1,121 @@
-.App {
+body {
+  background-color: #292c38;
+  color: #ffffff;
+  padding: 0px;
+  font-family: Arial;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+ul li{
+  display: inline;
+  margin: 3px;
+  color:blue;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+li a {
+  display: block;
+  padding: 8px;
+  background-color: #1e1e25;
+  text-decoration: none;
+  color:#ffffff;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+li a:hover {
+  background-color: #292c38;
+}
+
+ul{
+  list-style:none;
+  margin:0;
+  padding:0;
+  text-align:center;
+  background-color: #1e1e25;
+}
+
+ul a{
+  display:inline-block;
+  padding:20px;
+}
+
+button {
   color: white;
+  border: none;
+  padding: 10px 10px;
+  font-size: 14px;
+  border-radius: 10px;
+  background-color: #5F6F94;
+  margin: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.btn-danger {
+  background-color:#CD5C5C;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+table {
+  text-align: center;
+  display: inline-block;
 }
+
+.gg-mail,
+.gg-mail::after {
+    display: block;
+    box-sizing: border-box;
+    height: 14px;
+    border: 2px solid
+}
+.gg-mail {
+    overflow: hidden;
+    transform: scale(var(--ggs,1));
+    position: center;
+    width: 18px;
+    border-radius: 2px
+}
+.gg-mail::after {
+    content: "";
+    position: absolute;
+    border-radius: 3px;
+    width: 14px;
+    transform: rotate(-45deg);
+    bottom: 3px;
+    left: 0
+}
+
+.icon{
+  display:inline-block;
+  text-align: center;
+}
+
+@import url('https://css.gg/briefcase.css');
+
+h4, h3 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+h3 {
+  margin-top: 30px;;
+}
+
+input[type=username], input[type=password],input[type=updateContact] {
+  width: 100%;
+  padding: 6px 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+
+input[type=username]:focus, input[type=password]:focus, 
+input[type=updateContact]:focus {
+  border: 3px solid #555;
+}
+
+
+
+
+

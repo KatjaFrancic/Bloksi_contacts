@@ -5,7 +5,7 @@ export default function Contacts() {
     const store = contactsStore();
     return (
         <div>
-            <h2>Contacts: </h2>
+            <h2>My contacts</h2>
             {store.contacts && 
             store.contacts.map(contact => {
                 return (

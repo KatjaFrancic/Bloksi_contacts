@@ -15,7 +15,6 @@ export default function ContactsPage() {
     
     return (
         <div>
-            <Logout />
             <Contacts />
             <UpdateForm/>
         </div>

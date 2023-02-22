@@ -1,5 +1,4 @@
 import LoginForm from "../components/LoginForm";
-import UpdateForm from "../components/UpdateForm";
 
 export default function LoginPage() {
     return (
